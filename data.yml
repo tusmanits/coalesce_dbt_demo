@@ -5,7 +5,7 @@ locations:
     mappingDefinitions:
       "2":
         database: PC_COALESCE_DB
-        schema: ANALTYICS_DEV
+        schema: ANALYTICS_DEV
       "3":
         database: PC_COALESCE_DB
         schema: ANALYTICS_PROD
@@ -21,7 +21,7 @@ locations:
     mappingDefinitions:
       "2":
         database: PC_COALESCE_DB
-        schema: ANALTYICS_DEV
+        schema: ANALYTICS_DEV
       "3":
         database: PC_COALESCE_DB
         schema: ANALYTICS_PROD
