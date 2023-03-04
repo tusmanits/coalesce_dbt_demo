@@ -1,0 +1,209 @@
+steps:
+  FCT_SALES-12:
+    operation:
+      config:
+        postSQL: ""
+        preSQL: ""
+        testsEnabled: true
+      database: ""
+      dependencies: []
+      deployEnabled: true
+      description: Customer data as defined by TPC-H
+      isDataVault: false
+      isMultisource: false
+      locationID: ""
+      locationName: WORK
+      materializationType: table
+      metadata:
+        appliedNodeTests: []
+        columns:
+          - acceptedValues:
+              strictMatch: true
+              values: []
+            appliedColumnTests:
+              isDistinct: true
+            columnReference:
+              columnCounter: 109
+              stepCounter: "12"
+            config: {}
+            dataType: VARCHAR
+            defaultValue: ""
+            description: ""
+            isBusinessKey: true
+            keyColumnType: None
+            name: FCT_SALES_KEY
+            nullable: false
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: 0
+                    stepCounter: "0"
+                transform: CONCAT_WS('-', "DIM_CUSTOMER"."DIM_CUSTOMER_KEY", "STG_ORDERS"."O_ORDERKEY")
+            systemColumnType: None
+            transform: ""
+          - appliedColumnTests:
+              isDistinct: false
+            columnReference:
+              columnCounter: 95
+              stepCounter: "12"
+            dataType: NUMBER(38,0)
+            description: ""
+            hashColumns: []
+            hashDetails: null
+            name: DIM_CUSTOMER_KEY
+            nullable: false
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: 86
+                    stepCounter: "11"
+                transform: ""
+          - acceptedValues:
+              strictMatch: true
+              values: []
+            appliedColumnTests:
+              isDistinct: false
+            columnReference:
+              columnCounter: 106
+              stepCounter: "12"
+            config: {}
+            dataType: NUMBER(38,0)
+            defaultValue: ""
+            description: ""
+            keyColumnType: None
+            name: DIM_ORDER_KEY
+            nullable: false
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: 45
+                    stepCounter: "7"
+                transform: ""
+            systemColumnType: None
+            transform: ""
+          - acceptedValues:
+              strictMatch: true
+              values: []
+            appliedColumnTests:
+              isDistinct: false
+            columnReference:
+              columnCounter: 105
+              stepCounter: "12"
+            config: {}
+            dataType: TIMESTAMP
+            defaultValue: ""
+            description: ""
+            hashColumns: []
+            isSystemUpdateDate: true
+            name: SYSTEM_UPDATE_DATE
+            nullable: true
+            sourceColumnReferences:
+              - columnReferences: []
+                transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
+          - acceptedValues:
+              strictMatch: true
+              values: []
+            appliedColumnTests:
+              isDistinct: false
+            columnReference:
+              columnCounter: 104
+              stepCounter: "12"
+            config: {}
+            dataType: TIMESTAMP
+            defaultValue: ""
+            description: ""
+            hashColumns: []
+            isSystemCreateDate: true
+            name: SYSTEM_CREATE_DATE
+            nullable: true
+            sourceColumnReferences:
+              - columnReferences: []
+                transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
+          - acceptedValues:
+              strictMatch: true
+              values: []
+            appliedColumnTests:
+              isDistinct: false
+            columnReference:
+              columnCounter: 110
+              stepCounter: "12"
+            config: {}
+            dataType: DATE
+            defaultValue: ""
+            description: ""
+            keyColumnType: None
+            name: ORDER_DATE
+            nullable: true
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: 49
+                    stepCounter: "7"
+                transform: CAST("STG_ORDERS"."O_ORDERDATE" AS DATE)
+            systemColumnType: None
+            transform: ""
+          - acceptedValues:
+              strictMatch: true
+              values: []
+            appliedColumnTests:
+              isDistinct: false
+            columnReference:
+              columnCounter: 111
+              stepCounter: "12"
+            config: {}
+            dataType: NUMBER(38,2)
+            defaultValue: ""
+            description: ""
+            keyColumnType: None
+            name: ORDER_AMOUNT
+            nullable: true
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: 48
+                    stepCounter: "7"
+                transform: ""
+            systemColumnType: None
+            transform: ""
+          - acceptedValues:
+              strictMatch: true
+              values: []
+            appliedColumnTests: {}
+            columnReference:
+              columnCounter: 113
+              stepCounter: "12"
+            config: {}
+            dataType: VARCHAR
+            defaultValue: ""
+            description: ""
+            keyColumnType: None
+            name: ORDER_STATUS
+            nullable: true
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: 47
+                    stepCounter: "7"
+                transform: ""
+            systemColumnType: None
+            transform: ""
+        cteString: ""
+        enabledColumnTestIDs:
+          - isDistinct
+        sourceMapping:
+          - aliases:
+              DIM_CUSTOMER: "11"
+              STG_ORDERS: "7"
+            customSQL:
+              customSQL: ""
+            dependencies:
+              - locationName: WORK
+                nodeName: STG_ORDERS
+              - locationName: WORK
+                nodeName: DIM_CUSTOMER
+            join:
+              joinCondition: |-
+                FROM {{ ref('WORK', 'DIM_CUSTOMER') }} "DIM_CUSTOMER"
+                INNER JOIN {{ ref('WORK', 'STG_ORDERS') }} "STG_ORDERS" ON "DIM_CUSTOMER"."C_CUSTKEY" = "STG_ORDERS"."O_CUSTKEY"
+            name: FCT_SALES
+            noLinkRefs: []
+      name: FCT_SALES
+      overrideSQL: false
+      schema: ""
+      sqlType: Fact
+      type: sql
+    stepCounter: "12"
